@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -15,6 +15,19 @@ import { useNavigation } from "@react-navigation/native";
 const IndexScreen = () => {
   const { state, addBlogPost, deleteBlogPost } = useContext(Context);
   const navigation = useNavigation();
+
+  React.useEffect(() => {
+    // Use `setOptions` to update the button that we previously specified
+    // Now the button includes an `onPress` handler to update the count
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.navigate("Create Post")}>
+          <Feather name="plus" size={30} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
   return (
     <View>
       <View style={styles.listView}>
@@ -56,8 +69,8 @@ const styles = StyleSheet.create({
   listView: {
     marginTop: 20,
     height: 500,
-    borderWidth: 1,
-    borderColor: "grey",
+    // borderWidth: 1,
+    // borderColor: "grey",
   },
   row: {
     flexDirection: "row",
