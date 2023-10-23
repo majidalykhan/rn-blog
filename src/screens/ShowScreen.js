@@ -16,7 +16,9 @@ const ShowScreen = ({ route }) => {
     // Now the button includes an `onPress` handler to update the count
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("Edit Post")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Edit Post", { id: id })}
+        >
           <Feather name="edit" size={20} />
         </TouchableOpacity>
       ),
