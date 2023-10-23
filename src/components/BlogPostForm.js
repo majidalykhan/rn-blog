@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useContext, useState } from "react";
 import { Context } from "../context/BlogContext";
 
-const BlogPostForm = ({ route }) => {
+const BlogPostForm = ({ onSubmit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -21,7 +21,11 @@ const BlogPostForm = ({ route }) => {
         onChangeText={(text) => setDescription(text)}
       />
       <View style={styles.buttonView}>
-        <Button color="#000000" title="Save Post" />
+        <Button
+          color="#000000"
+          title="Save Post"
+          onPress={() => onSubmit(title, description)}
+        />
       </View>
     </View>
   );
