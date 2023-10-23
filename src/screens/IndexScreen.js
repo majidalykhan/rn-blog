@@ -10,9 +10,11 @@ import {
 import { ScrollView } from "react-native-virtualized-view";
 import { Context } from "../context/BlogContext";
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const IndexScreen = () => {
   const { state, addBlogPost, deleteBlogPost } = useContext(Context);
+  const navigation = useNavigation();
   return (
     <View>
       <View style={styles.listView}>
@@ -22,18 +24,22 @@ const IndexScreen = () => {
             keyExtractor={(blogPost) => blogPost.title}
             renderItem={({ item }) => {
               return (
-                <View style={styles.row}>
-                  <Text>
-                    {item.title} - {item.id}
-                  </Text>
-                  <TouchableOpacity>
-                    <Feather
-                      onPress={() => deleteBlogPost(item.id)}
-                      style={styles.icon}
-                      name="trash"
-                    />
-                  </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Blog", { id: item.id })}
+                >
+                  <View style={styles.row}>
+                    <Text>
+                      {item.title} - {item.id}
+                    </Text>
+                    <TouchableOpacity>
+                      <Feather
+                        onPress={() => deleteBlogPost(item.id)}
+                        style={styles.icon}
+                        name="trash"
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </TouchableOpacity>
               );
             }}
           />
