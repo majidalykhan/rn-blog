@@ -1,11 +1,18 @@
 import React, { useContext } from "react";
-import { FlatList, StyleSheet, Text, View, Button } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { ScrollView } from "react-native-virtualized-view";
 import { Context } from "../context/BlogContext";
 import { Feather } from "@expo/vector-icons";
 
 const IndexScreen = () => {
-  const { state, addBlogPost } = useContext(Context);
+  const { state, addBlogPost, deleteBlogPost } = useContext(Context);
   return (
     <View>
       <View style={styles.listView}>
@@ -16,8 +23,16 @@ const IndexScreen = () => {
             renderItem={({ item }) => {
               return (
                 <View style={styles.row}>
-                  <Text>{item.title}</Text>
-                  <Feather style={styles.icon} name="trash" />
+                  <Text>
+                    {item.title} - {item.id}
+                  </Text>
+                  <TouchableOpacity>
+                    <Feather
+                      onPress={() => deleteBlogPost(item.id)}
+                      style={styles.icon}
+                      name="trash"
+                    />
+                  </TouchableOpacity>
                 </View>
               );
             }}
