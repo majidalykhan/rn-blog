@@ -16,9 +16,7 @@ const EditScreen = ({ route }) => {
         description: blogPost.description,
       }}
       onSubmit={(title, description) => {
-        editBlogPost(id, title, description, () =>
-          navigation.navigate("Blogs")
-        );
+        editBlogPost(id, title, description, () => navigation.pop());
       }}
     />
   );
