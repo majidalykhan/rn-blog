@@ -1,11 +1,14 @@
 import { StyleSheet, Text, TextInput, View, Button } from "react-native";
 import React, { useContext, useState } from "react";
 import { Context } from "../context/BlogContext";
+import { useNavigation } from "@react-navigation/native";
 
 const CreateScreen = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const { addBlogPost } = useContext(Context);
+
+  const navigation = useNavigation();
 
   return (
     <View>
@@ -25,7 +28,9 @@ const CreateScreen = () => {
         <Button
           color="#000000"
           title="Add Post"
-          onPress={() => addBlogPost(title, description)}
+          onPress={() =>
+            addBlogPost(title, description, () => navigation.navigate("Blogs"))
+          }
         />
       </View>
     </View>

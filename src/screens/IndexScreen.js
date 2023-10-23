@@ -13,7 +13,7 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 const IndexScreen = () => {
-  const { state, addBlogPost, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost } = useContext(Context);
   const navigation = useNavigation();
 
   React.useEffect(() => {
@@ -32,40 +32,51 @@ const IndexScreen = () => {
     <View>
       <View style={styles.listView}>
         <ScrollView>
-          <FlatList
-            data={state}
-            keyExtractor={(blogPost) => blogPost.title}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Blog", { id: item.id })}
-                >
-                  <View style={styles.row}>
-                    <Text>
-                      {item.title} - {item.id}
-                    </Text>
-                    <TouchableOpacity>
-                      <Feather
-                        onPress={() => deleteBlogPost(item.id)}
-                        style={styles.icon}
-                        name="trash"
-                      />
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
+          {state.length === 0 ? (
+            <View style={styles.textView}>
+              <Text style={styles.text}>There are no posts yet</Text>
+            </View>
+          ) : (
+            <FlatList
+              data={state}
+              keyExtractor={(blogPost) => blogPost.title}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Blog", { id: item.id })}
+                  >
+                    <View style={styles.row}>
+                      <Text>
+                        {item.title} - {item.id}
+                      </Text>
+                      <TouchableOpacity>
+                        <Feather
+                          onPress={() => deleteBlogPost(item.id)}
+                          style={styles.icon}
+                          name="trash"
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          )}
         </ScrollView>
-      </View>
-      <View style={styles.buttonView}>
-        <Button color="#000000" title="Add Post" onPress={addBlogPost} />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  textView: {
+    marginTop: 10,
+    overflow: "hidden",
+  },
+  text: {
+    alignSelf: "center",
+    fontSize: 15,
+  },
   listView: {
     marginTop: 20,
     height: 500,
@@ -85,13 +96,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 24,
-  },
-  buttonView: {
-    marginTop: 20,
-    marginLeft: 50,
-    marginRight: 50,
-    borderRadius: 20,
-    overflow: "hidden",
   },
 });
 
