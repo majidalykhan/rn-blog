@@ -29,7 +29,7 @@ const IndexScreen = () => {
   }, [navigation]);
 
   return (
-    <View>
+    <View style={styles.view}>
       <View style={styles.listView}>
         <ScrollView>
           {state.length === 0 ? (
@@ -46,9 +46,7 @@ const IndexScreen = () => {
                     onPress={() => navigation.navigate("Blog", { id: item.id })}
                   >
                     <View style={styles.row}>
-                      <Text>
-                        {item.title} - {item.id}
-                      </Text>
+                      <Text style={styles.text}>{item.title}</Text>
                       <TouchableOpacity>
                         <Feather
                           onPress={() => deleteBlogPost(item.id)}
@@ -69,6 +67,10 @@ const IndexScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  view: {
+    backgroundColor: "#ffffff",
+    height: "100%",
+  },
   textView: {
     marginTop: 10,
     overflow: "hidden",

@@ -26,13 +26,34 @@ const ShowScreen = ({ route }) => {
   }, [navigation]);
 
   return (
-    <View>
-      <Text>{blogPost.title}</Text>
-      <Text>{blogPost.description}</Text>
+    <View style={styles.view}>
+      <Text style={styles.title}>{blogPost.title}</Text>
+      <Text style={styles.description}>{blogPost.description}</Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  view: {
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    height: "100%",
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: "500",
+    marginTop: 20,
+  },
+  description: {
+    fontSize: 15,
+    marginTop: 20,
+    borderWidth: 2,
+    borderColor: "grey",
+    borderRadius: 10,
+    padding: 20,
+    width: "90%",
+    textAlign: "center",
+  },
+});
 
 export default ShowScreen;

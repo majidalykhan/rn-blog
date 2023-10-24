@@ -2,20 +2,21 @@ import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useContext, useState } from "react";
 import { Context } from "../context/BlogContext";
 
-const BlogPostForm = ({ onSubmit, initialValues }) => {
+const BlogPostForm = ({ onSubmit, initialValues, text }) => {
   const [title, setTitle] = useState(initialValues.title);
   const [description, setDescription] = useState(initialValues.description);
 
   return (
-    <View>
-      <Text style={styles.label}>Enter Title</Text>
+    <View style={styles.view}>
+      <Text style={styles.label}>{text.title}</Text>
       <TextInput
         style={styles.input}
         value={title}
         onChangeText={(text) => setTitle(text)}
       />
-      <Text style={styles.label}>Enter Description</Text>
+      <Text style={styles.label}>{text.description}</Text>
       <TextInput
+        multiline
         style={styles.input}
         value={description}
         onChangeText={(text) => setDescription(text)}
@@ -39,17 +40,23 @@ BlogPostForm.defaultProps = {
 };
 
 const styles = StyleSheet.create({
+  view: {
+    backgroundColor: "#ffffff",
+    height: "100%",
+  },
   label: {
-    fontSize: 20,
+    fontSize: 18,
     marginBottom: 10,
     padding: 5,
   },
   input: {
-    fontSize: 18,
+    fontSize: 15,
     borderWidth: 1,
     borderColor: "grey",
     marginLeft: 5,
     marginRight: 5,
+    padding: 5,
+    height: "fit-content",
   },
   buttonView: {
     marginTop: 20,

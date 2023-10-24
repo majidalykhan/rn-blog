@@ -10,6 +10,7 @@ const CreateScreen = () => {
 
   return (
     <BlogPostForm
+      text={{ title: "Enter Title", description: "Enter Description" }}
       onSubmit={(title, description) => {
         addBlogPost(title, description, () => navigation.navigate("Blogs"));
       }}

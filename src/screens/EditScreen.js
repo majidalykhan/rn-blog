@@ -11,6 +11,7 @@ const EditScreen = ({ route }) => {
 
   return (
     <BlogPostForm
+      text={{ title: "Enter New Title", description: "Enter New Description" }}
       initialValues={{
         title: blogPost.title,
         description: blogPost.description,
